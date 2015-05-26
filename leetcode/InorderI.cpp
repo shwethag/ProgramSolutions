@@ -5,7 +5,7 @@
 using namespace std;
 
 /*
-Given a binary tree, return the preorder traversal of its nodes' values.
+Given a binary tree, return the inorder traversal of its nodes' values.
 
 For example:
 Given binary tree {1,#,2,3},
@@ -32,26 +32,32 @@ struct TreeNode {
 };
  
 class Solution {
-	vector<int> preorder;
+	vector<int> inorder;
 public:
-    vector<int> preorderTraversal(TreeNode* root) {
-      if(root == NULL)
-        return preorder;
-      stack<TreeNode *> stck;
-      stck.push(root);
-      while(!stck.empty()){
-        TreeNode * cur = stck.top();
-        preorder.push_back(cur->val);
-        stck.pop();
-        if(cur->right)
-           stck.push(cur->right);
-        if(cur->left)
-           stck.push(cur->left);
-        
+    vector<int> inorderTraversal(TreeNode* root) {
+    	if(!root)
+    		return inorder;
+     	stack<TreeNode *> stck;
+     	TreeNode *top;
+     	top = root;
+     	while(true){
+     		
+     		if(top != NULL){
+     			stck.push(top);
+     			top = top->left;
+     		}else{
+     			if(stck.empty())
+     				break;
+     			top = stck.top();
+     			stck.pop();
+     			inorder.push_back(top->val);
+     			top = top->right;
+     		}
+     		
 
-      }
+     	}
 
-      return preorder;
+     	return inorder;
     }
 };
 
@@ -70,11 +76,11 @@ int main(){
 
 	Solution s;
 
-	vector<int> preorder = s.preorderTraversal(root);
+	vector<int> inorder = s.inorderTraversal(root);
 	cout<<"[ ";
 		
-	for(int j=0;j<preorder.size();j++){
-		cout<<preorder[j]<<" ";
+	for(int j=0;j<inorder.size();j++){
+		cout<<inorder[j]<<" ";
 	}
 	
 	cout<<"]"<<endl;
