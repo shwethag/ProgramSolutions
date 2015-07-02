@@ -62,7 +62,7 @@ int main(){
 	cur->next = new ListNode(1);
 	cur = cur->next;
 
-	/*cur->next = new ListNode(3);
+	cur->next = new ListNode(3);
 	cur = cur->next;
 
 	cur->next = new ListNode(2);
@@ -72,7 +72,7 @@ int main(){
 	cur = cur->next;
 
 	cur->next = new ListNode(1);
-*/
+
 	Solution s;
 	head = s.partition(head,3);
 
